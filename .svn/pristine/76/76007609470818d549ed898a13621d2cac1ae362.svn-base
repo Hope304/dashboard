@@ -1,0 +1,86 @@
+<?php $__env->startSection('content'); ?>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-cog"></i> Điều chỉnh cấp cháy</h1>
+        </div>
+        <a href="admin/home" class="btn btn-info" style="margin-left: 5px">
+            <i class="fa fa-star"></i> <span>Cấp nguy cơ cháy</span>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <?php if(count($errors)>0): ?>
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $err): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo e($err); ?><br>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+            <?php endif; ?>
+            <?php if(session('baoloi')): ?>
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo e(session('baoloi')); ?>
+
+                </div>
+            <?php endif; ?>
+            <?php if(session('thongbao')): ?>
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo e(session('thongbao')); ?>
+
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <form action="admin/dieuchinhcapchay" method="post" class="custom-form" id="post_form">
+                <?php echo csrf_field(); ?>
+                <div class="form-group">
+                    <label>Chọn huyện:</label>
+                    <select name="mahuyen" id="mahuyen" class="form-control">
+                        <option value="">[Chọn huyện]</option>
+                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($item->mahuyen); ?>"><?php echo e(App\District::where('mahuyen', $item->mahuyen)->first()->huyen); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cấp cháy:</label>
+                    <input type="number" class="form-control" name="capchay" id="capchay" placeholder="Nhập cấp cháy 1-5" min="1" max="5">
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <button type="button" class="btn btn-primary btn_submit">Thực hiện</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function(){
+            $('.btn_submit').click(function(){
+                var mahuyen = $('#mahuyen').val();
+                var capchay = $('#capchay').val();
+                if(capchay == null || mahuyen == null || capchay =='' || mahuyen==''){
+                    alert('Vui lòng chọn huyện và nhập cấp cháy!');
+                    return;
+                }
+
+                if(capchay < 1 || capchay > 5){
+                    alert('Cấp cháy không hợp lệ');
+                    return;
+                }
+
+                $('#post_form').submit();
+            })
+        })
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Laravel\2023_GSR_HaNam\resources\views/admin/dieuchinhcapchay.blade.php ENDPATH**/ ?>

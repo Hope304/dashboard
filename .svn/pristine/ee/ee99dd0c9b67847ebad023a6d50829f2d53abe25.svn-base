@@ -1,0 +1,49 @@
+<?php $__env->startSection('content'); ?>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-eye"></i> Thông tin cá nhân</h1>
+        </div>
+        <a href="admin/profile/edit/<?php echo e($tk->id); ?>" class="btn btn-info" style="margin-left: 5px">
+            <i class="fa fa-user"></i> <span>Sửa thông tin</span>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <?php if(session('thongbao')): ?>
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo e(session('thongbao')); ?>
+
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td><?php echo e($tk->id); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Tên</th>
+                        <td><?php echo e($tk->name); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><?php echo e($tk->email); ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Laravel\2023_GSR_HaNam\resources\views/admin/profile/info.blade.php ENDPATH**/ ?>

@@ -1,0 +1,61 @@
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="admin/images/1.jpg" width="52px"
+            height="52px" alt="Avatar">
+        <div style="box-sizing: border-box">
+            <p class="app-sidebar__user-name"><?php echo e(Auth::user()->name); ?></p>
+            <?php if(Auth::user()->role =='admin'): ?>
+            <p class="app-sidebar__user-designation" style="color: #ffc107">Administrator</p>
+            <?php endif; ?>
+        </div>
+    </div>
+    <ul class="app-menu">
+        <li><a class="app-menu__item <?php if(Request()->is('admin/home')): ?> active <?php endif; ?>" href="admin/home"><i
+                    class="app-menu__icon fa fa-star"></i><span class="app-menu__label">Cấp nguy cơ cháy</span></a></li>
+        <li><a class="app-menu__item <?php if(Request()->is('admin/receiveEmail/*')): ?> active <?php endif; ?>"
+                href="admin/receiveEmail/list"><i class="app-menu__icon fa fa-users"></i><span
+                    class="app-menu__label">Quản lý thông tin và email</span></a></li>
+        <li><a class="app-menu__item <?php if(Request()->is('admin/hotspot/*')): ?> active <?php endif; ?>" href="admin/hotspot/list"><i
+                    class="app-menu__icon fa fa-fire"></i><span class="app-menu__label">Quản lý điểm cháy</span></a>
+        </li>
+        <li><a class="app-menu__item <?php if(Request()->is('admin/notification/*')): ?> active <?php endif; ?>"
+                href="admin/notification/list"><i class="app-menu__icon fa fa-bell"></i><span
+                    class="app-menu__label">Kiểm duyệt báo cháy</span></a>
+        </li>
+        <li><a class="app-menu__item <?php if(Request()->is('admin/exportData/*')): ?> active <?php endif; ?>"
+                href="admin/exportData/"><i class="app-menu__icon fa fa-download"></i><span
+                    class="app-menu__label">Trích xuất dữ liệu</span></a>
+        </li>
+        <?php if(Auth::user()->role =='admin'): ?>
+        <li><a class="app-menu__item <?php if(Request()->is('admin/shp/*')): ?> active <?php endif; ?>" href="admin/shp/"><i
+                    class="app-menu__icon fa fa-download"></i><span class="app-menu__label">Upload SHP</span></a>
+        </li>
+
+        <li><a class="app-menu__item <?php if(Request()->is('admin/backup/*')): ?> active <?php endif; ?>" href="admin/backup/"><i
+                    class="app-menu__icon fa fa-solid fa-rotate-right"></i><span class="app-menu__label">Backup Bản đồ</span></a>
+        </li>
+        <?php endif; ?>
+
+        <?php if(Auth::user()->role =='admin'): ?>
+        <li><a class="app-menu__item <?php if(Request()->is('admin/contact/*')): ?> active <?php endif; ?>" href="admin/contact/list"><i
+                    class="app-menu__icon fa fa-address-card-o"></i><span class="app-menu__label">Danh sách liên
+                    hệ</span></a>
+        </li>
+        <li><a class="app-menu__item <?php if(Request()->is('admin/users/*')): ?> active <?php endif; ?>" href="admin/users/list"><i
+                    class="app-menu__icon fa fa-star"></i><span class="app-menu__label">Tài khoản quản trị</span></a>
+        </li>
+        <?php endif; ?>
+        <li class="treeview"><a class="app-menu__item <?php if(Request()->is('admin/profile/*')): ?> active <?php endif; ?>" href="#"
+                data-toggle="treeview"><i class="app-menu__icon fa fa-cog"></i><span class="app-menu__label">Tài khoản
+                    của tôi</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="admin/profile/<?php echo e(Auth::user()->id); ?>"><i
+                            class="icon fa fa-circle-o"></i>Thông tin</a></li>
+                <li><a class="treeview-item" href="admin/profile/changepass/<?php echo e(Auth::user()->id); ?>"><i
+                            class="icon fa fa-circle-o"></i>Đổi mật khẩu</a></li>
+                <li><a class="treeview-item" href="admin/logout"><i class="icon fa fa-circle-o"></i>Thoát hệ thống</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</aside><?php /**PATH D:\Laravel\2023_GSR_HaNam\resources\views/admin/layout/menu.blade.php ENDPATH**/ ?>

@@ -1,0 +1,6 @@
+<h3>Thông tin xác minh báo cháy</h3><br>
+<p>Hệ thống giám sát rừng Hà Nam vừa nhận được thông tin xác minh báo cháy tại: </p>
+<p>X: <?php echo e($info->latitude); ?> , Y: <?php echo e($info->longitude); ?>; thuộc lô <?php echo e($info->lo); ?>/ khoảnh <?php echo e($info->khoanh); ?>/ tiểu khu <?php echo e($info->tk); ?>. Trên địa bàn xã/phường: <?php echo e($info->commune->xa); ?>; huyện/thành phố: <?php echo e($info->commune->district->huyen); ?></p>
+<p>Đề nghị quý cơ quan vào xác minh, kiểm duyệt.</p><br>
+<i><p>Ứng dụng được phát triển bởi Công ty CPTM Xuân Mai Green</p></i>
+<?php /**PATH D:\Laravel\2023_GSR_HaNam\resources\views/sendMail/mailVerify.blade.php ENDPATH**/ ?>

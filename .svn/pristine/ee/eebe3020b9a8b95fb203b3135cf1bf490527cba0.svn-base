@@ -1,0 +1,5 @@
+<header class="app-header"><a class="app-header__logo" href="admin/home">GSR Hà Nam</a>
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+</header>
+<?php echo $__env->make('admin.layout.menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php /**PATH D:\Laravel\2023_GSR_HaNam\resources\views/admin/layout/header.blade.php ENDPATH**/ ?>

@@ -1,0 +1,46 @@
+<?php $__env->startSection('content'); ?>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-star"></i> Số liệu kiểm tra các mức cảnh báo cấp độ cháy rừng từ 13h ngày <?php echo e($time_ago); ?> đến 13h ngày <?php echo e($time); ?></h1>
+        </div>
+        <?php if(Auth::user()->role != 'user'): ?>
+        <a href="admin/dieuchinhcapchay" class="btn btn-success">
+            <i class="fa fa-plus"></i> <span>Điều chỉnh cấp cháy</span>
+        </a>
+        <?php endif; ?>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="dataTables">
+            <thead>
+            <tr class="bg-primary" style="color: #fff">
+                <th>Huyện</th>
+                <th>Xã</th>
+                <th>Nhiệt độ</th>
+                <th>Độ ẩm</th>
+                <th>Tốc độ gió</th>
+                <th>Hướng gió</th>
+                <th>Lượng mưa</th>
+                <th>CSP</th>
+                <th>Cấp NCC</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td><?php echo e($data->commune->district->huyen); ?></td>
+                    <td><?php echo e($data->commune->xa); ?></td>
+                    <td><?php echo e($data->nhietdo); ?></td>
+                    <td><?php echo e($data->doam); ?></td>
+                    <td><?php echo e($data->tocdogio); ?></td>
+                    <td><?php echo e($data->huonggio); ?></td>
+                    <td><?php echo e($data->luongmua); ?></td>
+                    <td><?php echo e($data->csp); ?></td>
+                    <td><?php echo e($data->capncc); ?></td>
+                </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </tbody>
+        </table>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Laravel\2023_GSR_HaNam\resources\views/admin/home.blade.php ENDPATH**/ ?>

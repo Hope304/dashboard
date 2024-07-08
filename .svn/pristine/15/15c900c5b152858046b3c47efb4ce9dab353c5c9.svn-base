@@ -1,0 +1,88 @@
+<?php $__env->startSection('content'); ?>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-edit"></i> Sửa thông tin</h1>
+        </div>
+        <a href="admin/contact/list" class="btn btn-info" style="margin-left: 5px">
+            <i class="fa fa-list"></i> <span>Danh Sách</span>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <?php if(count($errors)>0): ?>
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $err): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo e($err); ?><br>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+            <?php endif; ?>
+            <?php if(session('thongbao')): ?>
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo e(session('thongbao')); ?>
+
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <form action="admin/contact/edit/<?php echo e($tk->id); ?>" method="post" class="custom-form">
+                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"/>
+				<?php if(Auth::user()->role == 1): ?>
+                    <div class="form-group">
+                        <label>Huyện:</label>
+                        <select class="form-control" name="mahuyen" id="district">
+                            <?php $__currentLoopData = $district; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($dt->mahuyen); ?>"
+                                        <?php if($tk->mahuyen == $dt->mahuyen): ?> selected <?php endif; ?>><?php echo e($dt->huyen); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                    </div>
+                <?php endif; ?>
+                <?php if(Auth::user()->role == 2): ?>
+                    <div class="form-group">
+                        <label>Huyện:</label>
+                        <select class="form-control" name="mahuyen" required id="district">
+                            <option value="415" <?php if($tk->mahuyen == 415): ?> selected <?php endif; ?>>Huyện Quế Phong
+                            </option>
+                            <option value="416" <?php if($tk->mahuyen == 416): ?> selected <?php endif; ?>>Huyện Quỳ Châu
+                            </option>
+                        </select>
+                    </div>
+                <?php endif; ?>
+                <div class="form-group">
+                    <label>Họ tên:</label>
+                    <input type="text" value="<?php echo e($tk->name); ?>" class="form-control" name="name">
+                </div>
+                <div class="form-group">
+                    <label>Chức vụ:</label>
+                    <input type="text" value="<?php echo e($tk->position); ?>" class="form-control" name="position">
+                </div>
+                <div class="form-group">
+                    <label>Phòng ban:</label>
+                    <input type="text" value="<?php echo e($tk->department); ?>" class="form-control" name="department">
+                </div>
+                <div class="form-group">
+                    <label>Điện thoại:</label>
+                    <input type="text" value="<?php echo e($tk->phone); ?>" class="form-control" name="phone">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" value="<?php echo e($tk->email); ?>" class="form-control" name="email">
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <button type="submit" class="btn btn-primary">Sửa</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('admin.layout.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Laravel\2023_GSR_HaNam\resources\views/admin/contact/edit.blade.php ENDPATH**/ ?>
